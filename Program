@@ -1,0 +1,26 @@
+Import heapq
+Def uniform_cost_search(graph, start, goal):
+    Queue = [(0, start, [start])]  # (cost, current_node, path)
+    Visited = set()
+    While queue:
+        Cost, node, path = heapq.heappop(queue)
+        If node == goal:
+            Return cost, path
+        If node not in visited:
+            Visited.add(node)
+            For neighbor, distance in graph[node]:
+               Heapq.heappush(queue, (cost + distance, neighbor, path + [neighbor]))
+    Return float(“inf”), []
+# Example graph
+City_graph = {
+    ‘A’: [(‘B’, 3), (‘C’, 1)],
+    ‘B’: [(‘D’, 3), (‘E’, 1)],
+    ‘C’: [(‘D’, 1), (‘B’, 1)],
+    ‘D’: [(‘E’, 5)],
+    ‘E’: []
+}
+Start, goal = ‘A’, ‘E’
+Cost, path = uniform_cost_search(city_graph, start, goal)
+Print(“Shortest Path:”, path)
+Print(“Total Cost:”, cost)
+
